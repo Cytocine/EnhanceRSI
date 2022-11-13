@@ -1,0 +1,33 @@
+// EnhanceRSI//
+// version 1.0
+// Arranged by Cytocine
+// Based on the RSI - EMA crossover strategy
+
+study(title="EnhanceRSI", shorttitle="EnhanceRSI", format=format.price, precision=2)
+src = close
+len1 = input(14, minval=1, title="Length1")
+up1 = rma(max(change(src), 0), len1)
+down1 = rma(-min(change(src), 0), len1)
+
+rsia1 = down1 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up1 / down1))
+RSII = plot(series =rsia1, color=#2196F3, title="RSI")
+
+
+//RSIEMA
+lenema = input(34, minval=1, title="RSI EMA Length")
+out = ema(rsia1, lenema)
+EMA = plot(series = out, title="RSI EMA", linewidth=2)
+
+fill(RSII, EMA, color=iff(rsia1>out, color.green, color.red), opacity = 40)
+
+band1 = hline(70, title="Upper Band",color=#9A9A9A, linestyle=hline.style_solid)
+band3 = hline(75, title="Lower Band3",color=#9A9A9A, linestyle=hline.style_solid)
+band0 = hline(25, title="Lower Band",color=#9A9A9A, linestyle=hline.style_solid)
+band2 = hline(20, title="Lower Band2",color=#9A9A9A, linestyle=hline.style_solid)
+band4 = hline(50, title="Lower Band4",color=#9A9A9A, linestyle=hline.style_solid)
+fill(band1, band0, color=#787B86, opacity=20, title="Background")
+fill(band2, band0, color=#4CAF50, opacity=20, title="Background")
+fill(band1, band3, color=#FF5252, opacity=20, title="Background")
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
