@@ -1,6 +1,7 @@
 // EnhanceRSI//
 // version 1.0
 // Arranged by Cytocine
+//https://twitter.com/cytocine
 // Based on the RSI - EMA crossover strategy
 
 study(title="EnhanceRSI", shorttitle="EnhanceRSI", format=format.price, precision=2)
